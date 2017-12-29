@@ -10,10 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var numPeopleLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
     @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var splitAmountLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
+    
+    @IBAction func increaseNumPeople(_ sender: UIStepper) {
+        let stepperVal = Int(sender.value)
+        numPeopleLabel.text = String(stepperVal)
+        calculateTip(self)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("view will appear")
@@ -22,10 +31,18 @@ class ViewController: UIViewController {
         calculateTip(self) // updating label values
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("view did appear")
+        billField.becomeFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "Tip Calculator"
+        stepper.minimumValue = 1.0
+        stepper.isContinuous = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,8 +59,11 @@ class ViewController: UIViewController {
         let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
+        let splitAmount = total / (Double(numPeopleLabel.text!) ?? 0)
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
+        splitAmountLabel.text = String(format: "$%.2f", splitAmount)
+        
     }
 }
 
