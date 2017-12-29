@@ -19,12 +19,7 @@ class ViewController: UIViewController {
         print("view will appear")
         let defaults = UserDefaults.standard
         tipControl.selectedSegmentIndex = defaults.integer(forKey: "defaultPercentageIndex")
-        let tipPercentages = [0.18, 0.2, 0.25]
-        let bill = Double(billField.text!) ?? 0
-        let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
-        let total = bill + tip
-        tipLabel.text = String(format: "$%.2f", tip)
-        totalLabel.text = String(format: "$%.2f", total)
+        calculateTip(self) // updating label values
     }
     
     override func viewDidLoad() {
@@ -44,8 +39,6 @@ class ViewController: UIViewController {
     
     @IBAction func calculateTip(_ sender: Any) {
         let tipPercentages = [0.18, 0.2, 0.25]
-        
-        
         let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
