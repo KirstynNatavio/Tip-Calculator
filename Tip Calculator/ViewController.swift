@@ -43,6 +43,12 @@ class ViewController: UIViewController {
         self.title = "Tip Calculator"
         stepper.minimumValue = 1.0
         stepper.isContinuous = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+        billField.layer.borderColor = UIColor.white.cgColor
+        billField.layer.borderWidth = 1.0
     }
 
     override func didReceiveMemoryWarning() {
