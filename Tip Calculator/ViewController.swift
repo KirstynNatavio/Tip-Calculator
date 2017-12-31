@@ -103,7 +103,7 @@ class ViewController: UIViewController {
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let tipText = tip as NSNumber
         let total = bill + tip
-        let totalText = tip as NSNumber
+        let totalText = total as NSNumber
         let splitAmount = total / (Double(numPeopleLabel.text!) ?? 0)
         let splitAmountText = splitAmount as NSNumber
         tipLabel.text = currencyFormatter.string(from: tipText)
