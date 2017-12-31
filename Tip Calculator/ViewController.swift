@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var numPeopleLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
@@ -18,6 +19,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var splitAmountLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
     
+    @IBAction func moveComponents(_ sender: UITextField) {
+        if sender.text == "" {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.contentView.frame.origin.y = 500
+                self.billField.frame.size.height = 370
+                self.billField.backgroundColor = UIColor(red: 87/255, green: 226/255, blue: 226/255, alpha: 1)
+                self.billField.textColor = UIColor.white
+            })
+        }
+        else {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.contentView.frame.origin.y = 190
+                self.billField.frame.size.height = 107
+                self.billField.backgroundColor = UIColor.white
+                self.billField.textColor = UIColor(red: 87/255, green: 226/255, blue: 226/255, alpha: 1)
+            })
+            calculateTip(self)
+        }
+        
+    }
     @IBAction func increaseNumPeople(_ sender: UIStepper) {
         let stepperVal = Int(sender.value)
         numPeopleLabel.text = String(stepperVal)
